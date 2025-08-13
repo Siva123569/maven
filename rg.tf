@@ -5,5 +5,6 @@ resource "azurerm_resource_group" "name" {
     environment = "testing"
     prod ="ramesh"
     siva = "siva"
+     dev = "prodenv"
   }
 }
