@@ -3,6 +3,6 @@ resource "azurerm_resource_group" "name" {
   location = "West Europe"
   tags = {
     environment = "testing"
-    
+    prod ="ramesh"
   }
 }
