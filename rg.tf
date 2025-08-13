@@ -4,5 +4,6 @@ resource "azurerm_resource_group" "name" {
   tags = {
     environment = "testing"
     prod ="ramesh"
+    siva = "siva"
   }
 }
