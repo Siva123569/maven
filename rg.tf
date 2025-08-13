@@ -6,5 +6,6 @@ resource "azurerm_resource_group" "name" {
     prod ="ramesh"
     siva = "siva"
      dev = "prodenv"
+    dev = "devenv"
   }
 }
