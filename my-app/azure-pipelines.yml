@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: mywarapp
-          image: nsbyadav14e/loginpage:latest
+          image: nsbyadav14e/siva2
           ports:
             - containerPort: 8080
 
