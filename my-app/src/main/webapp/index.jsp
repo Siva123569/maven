@@ -1,47 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Usain Bolt Gallery</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
             margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-        }
-        .gallery {
+            padding: 0;
+            font-family: Arial, sans-serif;
+
+            /* Full screen background image */
+            background: url("https://images.unsplash.com/photo-1503264116251-35a269479413") no-repeat center center fixed;
+            background-size: cover;
+
             display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
+            height: 100vh;
+            align-items: center;
             justify-content: center;
         }
-        .gallery img {
-            width: 300px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            transition: 0.3s;
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px 40px;
+            width: 350px;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.4);
         }
-        .gallery img:hover {
-            transform: scale(1.05);
+
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .login-box button:hover {
+            background: #0056c7;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 15px;
+            color: #555;
+        }
+
+        .footer-text a {
+            color: #007bff;
+            text-decoration: none;
         }
     </style>
 </head>
+
 <body>
+    <div class="login-box">
+        <h2>Login</h2>
 
-    <h1>Usain Bolt Image Gallery</h1>
+        <form action="/login" method="post">
+            <input type="text" name="username" placeholder="Enter Username" required>
+            <input type="password" name="password" placeholder="Enter Password" required>
 
-    <div class="gallery">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Usain_Bolt_Rio_2016.jpg" alt="Usain Bolt Rio 2016">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Usain_Bolt_2013_World_Championships.jpg" alt="Usain Bolt running">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Usain_Bolt_2009_World_Championships_Berlin.jpg" alt="Usain Bolt iconic pose">
+            <button type="submit">Login</button>
+        </form>
+
+        <p class="footer-text">
+            Need an account? <a href="#">Register</a>
+        </p>
     </div>
-
 </body>
 </html>
