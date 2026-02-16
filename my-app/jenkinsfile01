@@ -9,6 +9,7 @@ pipeline {
     environment {
         REPO_URL = 'https://github.com/Siva123569/maven.git'
         BRANCH_NAME = 'feature'
+        IMAGE_NAME = 'nsbyadav14e/flip01'
     }
 
     stages {
@@ -20,19 +21,37 @@ pipeline {
             }
         }
 
-        stage('Go To my-app Folder') {
-            steps {
-                dir('my-app') {
-                    sh 'ls -l'
-                }
-            }
-        }
-
-        stage('Build Project') {
+        stage('Build Maven Project') {
             steps {
                 dir('my-app') {
                     sh 'mvn clean package'
                 }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                dir('my-app') {
+                    sh 'docker build -t $IMAGE_NAME:latest .'
+                }
+            }
+        }
+
+        stage('Login to DockerHub') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                sh 'docker push $IMAGE_NAME:latest'
             }
         }
     }
