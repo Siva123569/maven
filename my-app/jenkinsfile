@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    tools {
+        jdk 'jdk-21'
+        maven 'mvn-3.8'
+    }
+
+    environment {
+        REPO_URL = 'https://github.com/Siva123569/maven.git'
+        BRANCH_NAME = 'feature'
+    }
+
+    stages {
+
+        stage('Checkout Code') {
+            steps {
+                git branch: "${BRANCH_NAME}",
+                    url: "${REPO_URL}"
+            }
+        }
+
+        stage('Go To my-app Folder') {
+            steps {
+                dir('my-app') {
+                    sh 'ls -l'
+                }
+            }
+        }
+
+        stage('Build Project') {
+            steps {
+                dir('my-app') {
+                    sh 'mvn clean package'
+                }
+            }
+        }
+    }
+}
