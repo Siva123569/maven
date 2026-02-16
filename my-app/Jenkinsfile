@@ -10,6 +10,7 @@ pipeline {
         REPO_URL = 'https://github.com/Siva123569/maven.git'
         BRANCH_NAME = 'feature'
         IMAGE_NAME = 'nsbyadav14e/flip01'
+        CONTAINER_NAME = 'flip-container'
     }
 
     stages {
@@ -34,6 +35,25 @@ pipeline {
                 dir('my-app') {
                     sh 'docker build -t $IMAGE_NAME:latest .'
                 }
+            }
+        }
+
+        stage('Stop Old Container') {
+            steps {
+                sh '''
+                docker stop $CONTAINER_NAME || true
+                docker rm $CONTAINER_NAME || true
+                '''
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                sh '''
+                docker run -d -p 8081:8081 \
+                --name $CONTAINER_NAME \
+                $IMAGE_NAME:latest
+                '''
             }
         }
 
