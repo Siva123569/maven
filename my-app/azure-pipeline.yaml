@@ -10,7 +10,7 @@ steps:
   displayName: Build and Push Docker Image
   inputs:
     containerRegistry: 'DockerHubServiceConnection'
-    repository: 'nsbyadav14e/mywarapp'
+    repository: 'nsbyadav14e/flip01'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
     tags: |
@@ -22,4 +22,4 @@ steps:
   inputs:
     azureSubscription: 'AzureServiceConnection'
     appName: 'sivaapp01234'
-    containers: 'nsbyadav14e/mywarapp:latest'
+    containers: 'nsbyadav14e/flip01:latest'
