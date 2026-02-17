@@ -12,6 +12,13 @@
     <name>mavenproject01 Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
+    <!-- ✅ SonarQube Properties -->
+    <properties>
+        <sonar.projectKey>mavenproject01</sonar.projectKey>
+        <sonar.projectName>mavenproject01</sonar.projectName>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -34,6 +41,14 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+
+            <!-- ✅ Sonar Maven Plugin -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.10.0.2594</version>
+            </plugin>
+
         </plugins>
 
     </build>
