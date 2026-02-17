@@ -68,7 +68,7 @@ pipeline {
                       --name $AKS_CLUSTER \
                       --overwrite-existing
 
-                    kubectl apply -f my-app/azure-pipeline.yml
+                    kubectl apply -f my-app/azure-pipelines.yml
                     '''
                 }
             }
