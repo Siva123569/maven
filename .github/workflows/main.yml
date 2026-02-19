@@ -1,0 +1,38 @@
+name: Maven Build and Docker
+
+on:
+  push:
+    branches:
+      - feature
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # ✅ Setup Java
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # ✅ Build using Maven
+      - name: Build with Maven
+        run: |
+          cd my-app
+          mvn clean package
+
+      # ✅ Build Docker Image
+      - name: Build Docker Image
+        run: docker build -t siva-app:latest ./my-app
+
+      # ✅ Run Docker Container
+      - name: Run Docker Container
+        run: |
+          docker run -d -p 8080:8080 --name siva-container siva-app:latest
+          docker ps
