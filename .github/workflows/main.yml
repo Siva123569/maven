@@ -1,4 +1,4 @@
-name: Maven Build Docker Push
+name: Maven Build and Docker
 
 on:
   push:
@@ -11,8 +11,13 @@ jobs:
     runs-on: [self-hosted, Linux, X64]
 
     steps:
-      - name: Checkout Code
+      - name: Checkout Feature Branch
         uses: actions/checkout@v4
+        with:
+          ref: feature
+
+      - name: Show Files (Debug)
+        run: ls -la
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -24,17 +29,19 @@ jobs:
         working-directory: my-app
         run: mvn clean package
 
+      - name: Build Docker Image
+        run: docker build -t siva-app:latest ./my-app
       - name: Docker Login
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/varam-lakshimi:latest ./my-app
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/siva-app:latest ./my-app
 
       - name: Push Docker Image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/varam-lakshimi:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/siva-app:latest
 
       - name: Run Docker Container
         run: |
           docker rm -f siva-container || true
-          docker run -d -p 8080:8080 --name siva-container ${{ secrets.DOCKER_USERNAME }}/varam-lakshimi:latest
+          docker run -d -p 8080:8080 --name siva-container siva-app:latest
           docker ps
